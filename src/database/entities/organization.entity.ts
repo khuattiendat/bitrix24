@@ -11,6 +11,9 @@ import { Task } from './tasks.entity';
 import { TaskLog } from './taskLog.entity';
 import { FeedPost } from './feedpost.entity';
 import { Comment } from './comment.entity';
+import { ChatRoom } from './chatRoom.entity';
+import { ChatMessage } from './chatMessage.entity';
+import { Notification } from './notification.entity';
 
 @Entity('organizations')
 export class Organization extends BaseEntity {
@@ -70,4 +73,13 @@ export class Organization extends BaseEntity {
   // relation with comments
   @OneToMany(() => Comment, (comment) => comment.organization)
   comments: Comment[];
+  // relations with chat rooms
+  @OneToMany(() => ChatRoom, (chatRoom) => chatRoom.organization)
+  chatRooms: ChatRoom[];
+  // relations with chat messages
+  @OneToMany(() => ChatMessage, (chatMessage) => chatMessage.organization)
+  chatMessages: ChatMessage[];
+  // relations with notifications
+  @OneToMany(() => Notification, (notification) => notification.organization)
+  notifications: Notification[];
 }

@@ -13,6 +13,7 @@ import { OrganizationMember } from '@/database/entities/organizationMember.entit
 import { Project } from '@/database/entities/project.entity';
 import { FeedPostAttachment } from './feedPostAttachment.entity';
 import { CommentAttachment } from './commentAttachment.entity';
+import { ChatMessageAttachment } from './chatMessageAttachment.entity';
 
 @Entity('files')
 export class File extends BaseEntity {
@@ -76,4 +77,10 @@ export class File extends BaseEntity {
     onDelete: 'CASCADE',
   })
   commentAttachments?: CommentAttachment[];
+  // add more relations if needed
+  @OneToMany(() => ChatMessageAttachment, (attachment) => attachment.file, {
+    nullable: true,
+    onDelete: 'CASCADE',
+  })
+  chatMessageAttachments?: ChatMessageAttachment[];
 }

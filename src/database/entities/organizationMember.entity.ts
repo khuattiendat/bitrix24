@@ -21,6 +21,11 @@ import { FeedPost } from './feedpost.entity';
 import { FeedPostMention } from './feedPostMention.entity';
 import { Comment } from './comment.entity';
 import { CommentMention } from './commentMention.entity';
+import { ChatRoom } from './chatRoom.entity';
+import { ChatMessage } from './chatMessage.entity';
+import { ChatMessageMention } from './chatMessageMention.entity';
+import { Reaction } from './reaction.entity';
+import { Notification } from './notification.entity';
 
 @Entity('organization_members')
 export class OrganizationMember {
@@ -96,4 +101,22 @@ export class OrganizationMember {
   // relation with comment mentions
   @OneToMany(() => CommentMention, (mention) => mention.mentionedMember)
   commentsMemberShips: CommentMention[];
+  // relations with chat rooms created
+  @OneToMany(() => ChatRoom, (chatRoom) => chatRoom.createdBy)
+  createdChatRooms: ChatRoom[];
+  // relaytion with chat messages sent
+  @OneToMany(() => ChatMessage, (message) => message.sentBy)
+  sentChatMessages: ChatMessage[];
+  // relation with chat room memberships
+  @OneToMany(() => ChatRoom, (chatRoom) => chatRoom.members)
+  chatRooms: ChatRoom[];
+  // relation with chat message mentions
+  @OneToMany(() => ChatMessageMention, (mention) => mention.mentionedMember)
+  chatMessageMentions: ChatMessageMention[];
+  // relation with chat message reactions
+  @OneToMany(() => Reaction, (reaction) => reaction.member)
+  chatMessageReactions?: Reaction[];
+  // relations with notifications
+  @OneToMany(() => Notification, (notification) => notification.receiver)
+  notifications: Notification[];
 }

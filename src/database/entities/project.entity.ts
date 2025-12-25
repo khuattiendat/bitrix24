@@ -4,8 +4,9 @@ import { BaseEntity } from '@/common/base/base.entity';
 import { Organization } from '@/database/entities/organization.entity';
 import { OrganizationMember } from '@/database/entities/organizationMember.entity';
 import { ProjectMember } from '@/database/entities/projectMember.entity';
-import { Task } from './tasks.entity';
 import { FeedPost } from './feedpost.entity';
+import { ChatRoom } from './chatRoom.entity';
+import { Task } from './tasks.entity';
 
 @Entity('projects')
 export class Project extends BaseEntity {
@@ -55,4 +56,7 @@ export class Project extends BaseEntity {
   // realtion with feed posts
   @OneToMany(() => FeedPost, (post) => post.project)
   feedPosts: FeedPost[];
+  //  relation with chat rooms
+  @OneToMany(() => ChatRoom, (chatRoom) => chatRoom.project)
+  chatRooms: ChatRoom[];
 }

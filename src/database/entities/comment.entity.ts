@@ -7,6 +7,7 @@ import { FeedPost } from './feedpost.entity';
 import { Task } from './tasks.entity';
 import { CommentMention } from './commentMention.entity';
 import { CommentAttachment } from './commentAttachment.entity';
+import { Reaction } from './reaction.entity';
 
 @Entity('comments')
 export class Comment extends BaseEntity {
@@ -42,8 +43,8 @@ export class Comment extends BaseEntity {
   orderIndex: number;
   // relation member
   @ManyToOne(() => OrganizationMember, (member) => member.comments, {
-    nullable: false,
-    onDelete: 'CASCADE',
+    nullable: true,
+    onDelete: 'SET NULL',
   })
   @JoinColumn({ name: 'created_by_member_id' })
   member: Comment;
@@ -90,4 +91,7 @@ export class Comment extends BaseEntity {
     onDelete: 'CASCADE',
   })
   attachments?: CommentAttachment[];
+  // relation with reactions
+  @OneToMany(() => Reaction, (reaction) => reaction.comment)
+  commentReactions?: Reaction[];
 }

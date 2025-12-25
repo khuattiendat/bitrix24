@@ -14,14 +14,7 @@ export const typeOrmOptions: TypeOrmModuleOptions = {
   username: process.env.DB_USERNAME || 'root',
   password: process.env.DB_PASSWORD || '',
   database: process.env.DB_NAME,
-  entities: [
-    User,
-    Organization,
-    OrganizationMember,
-    Project,
-    ProjectMember,
-    File,
-  ],
+  entities: [__dirname + '/../**/*.entity{.ts,.js}'],
   synchronize: false, // Set to true only in development
   logging: true,
 };

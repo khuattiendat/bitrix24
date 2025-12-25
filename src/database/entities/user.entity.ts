@@ -10,6 +10,7 @@ import { BaseEntity } from '@/common/base/base.entity';
 import { UserRole, userStatus } from '@/common/enum/user.enum';
 import { File } from '@/database/entities/file.entity';
 import { OrganizationMember } from '@/database/entities/organizationMember.entity';
+import { Notification } from './notification.entity';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -54,4 +55,6 @@ export class User extends BaseEntity {
   last_login_at: Date;
   @OneToMany(() => OrganizationMember, (member) => member.user)
   organizationMemberships: OrganizationMember[];
+  @OneToMany(() => Notification, (notification) => notification.user)
+  notifications: Notification[];
 }

@@ -6,6 +6,7 @@ import { Project } from './project.entity';
 import { FeedPostMention } from './feedPostMention.entity';
 import { FeedPostAttachment } from './feedPostAttachment.entity';
 import { Comment } from './comment.entity';
+import { Reaction } from './reaction.entity';
 
 @Entity('feed_posts')
 export class FeedPost extends BaseEntity {
@@ -60,4 +61,7 @@ export class FeedPost extends BaseEntity {
     onDelete: 'CASCADE',
   })
   comments?: Comment[];
+  // relation reactions
+  @OneToMany(() => Reaction, (reaction) => reaction.feedPost)
+  feedPostReactions?: Reaction[];
 }
