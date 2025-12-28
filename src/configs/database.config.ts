@@ -16,5 +16,5 @@ export const typeOrmOptions: TypeOrmModuleOptions = {
   database: process.env.DB_NAME,
   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
   synchronize: false, // Set to true only in development
-  logging: true,
+  logging: false,
 };

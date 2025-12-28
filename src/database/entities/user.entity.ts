@@ -11,7 +11,7 @@ import { UserRole, userStatus } from '@/common/enum/user.enum';
 import { File } from '@/database/entities/file.entity';
 import { OrganizationMember } from '@/database/entities/organizationMember.entity';
 import { Notification } from './notification.entity';
-
+import * as bcrypt from 'bcrypt';
 @Entity('users')
 export class User extends BaseEntity {
   @Column({ unique: true, nullable: false, length: 255 })
@@ -57,4 +57,8 @@ export class User extends BaseEntity {
   organizationMemberships: OrganizationMember[];
   @OneToMany(() => Notification, (notification) => notification.user)
   notifications: Notification[];
+  // compare password
+  async comparePassword(plain: string): Promise<boolean> {
+    return bcrypt.compare(plain, this.password);
+  }
 }
