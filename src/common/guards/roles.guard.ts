@@ -30,7 +30,7 @@ export class RolesSystemGuard implements CanActivate {
         'Bạn không có quyền truy cập vào tài nguyên này',
       );
     }
-    const hasRole = requiredRoles.includes(user.system_role);
+    const hasRole = requiredRoles.includes(user.systemRole);
     if (!hasRole) {
       throw new ForbiddenException(
         'Bạn không có quyền truy cập vào tài nguyên này',

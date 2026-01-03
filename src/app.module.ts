@@ -6,12 +6,14 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import { AllExceptionFilter } from './common/filters/all-exception.filter';
 import { AuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
     TypeOrmModule.forRoot({ ...typeOrmOptions, autoLoadEntities: true }),
     AuthModule,
+    UserModule,
   ],
   controllers: [],
   providers: [

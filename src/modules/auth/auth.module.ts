@@ -9,7 +9,6 @@ import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard';
 import { JwtModule } from '@nestjs/jwt';
 import 'dotenv/config';
 import { rootConfig } from '@/configs/const.config';
-import { RoleSystem } from '@/common/decorators/roles.decorator';
 import { RolesSystemGuard } from '@/common/guards/roles.guard';
 import { OrganizationMember } from '@/database/entities/organizationMember.entity';
 import { Organization } from '@/database/entities/organization.entity';
@@ -31,5 +30,6 @@ import { Organization } from '@/database/entities/organization.entity';
     JwtAuthGuard,
     RolesSystemGuard,
   ],
+  exports: [AuthService],
 })
 export class AuthModule {}

@@ -24,9 +24,9 @@ export class File extends BaseEntity {
   fileName: string;
   @Column({
     nullable: false,
-    name: 'mimeType',
+    name: 'mime_type',
   })
-  mime_type: string;
+  mimeType: string;
   @Column({
     nullable: false,
     name: 'size',

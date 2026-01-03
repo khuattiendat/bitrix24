@@ -20,8 +20,8 @@ export async function seedAdmin(dataSource: DataSource) {
     userRepo.create({
       email,
       password,
-      full_name: fullName,
-      system_role: role,
+      fullName: fullName,
+      systemRole: role,
     }),
   );
 

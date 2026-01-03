@@ -26,11 +26,11 @@ export class Project extends BaseEntity {
   })
   status: ProjectStatus;
 
-  @Column({ type: 'date', nullable: true })
-  start_date?: Date;
+  @Column({ type: 'date', nullable: true, name: 'start_date' })
+  startDate?: Date;
 
-  @Column({ type: 'date', nullable: true })
-  end_date?: Date;
+  @Column({ type: 'date', nullable: true, name: 'end_date' })
+  endDate?: Date;
 
   /* ================= relations ================= */
 

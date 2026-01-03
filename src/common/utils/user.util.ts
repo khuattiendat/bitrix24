@@ -3,9 +3,9 @@ import { User } from '@/database/entities/user.entity';
 export const validateUserResponse = (user: User) => {
   const {
     email,
-    full_name,
-    date_of_birth,
-    system_role,
+    fullName,
+    dateOfBirth,
+    systemRole,
     avatar,
     id,
     organizationMemberships,
@@ -14,15 +14,15 @@ export const validateUserResponse = (user: User) => {
     return {
       id: membership.organization.id,
       name: membership.organization.name,
-      organization_role: membership.role,
+      organizationRole: membership.role,
     };
   });
   return {
     id,
     email,
-    full_name,
-    date_of_birth,
-    system_role,
+    fullName,
+    dateOfBirth,
+    systemRole,
     avatar,
     organizations,
   };

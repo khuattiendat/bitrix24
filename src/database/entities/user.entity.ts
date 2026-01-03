@@ -24,8 +24,9 @@ export class User extends BaseEntity {
   @Column({
     nullable: false,
     length: 255,
+    name: 'full_name',
   })
-  full_name: string;
+  fullName: string;
   @ManyToOne(() => File, {
     nullable: true,
     onDelete: 'SET NULL',
@@ -37,8 +38,9 @@ export class User extends BaseEntity {
     type: 'enum',
     enum: UserRole,
     default: UserRole.NONE,
+    name: 'system_role',
   })
-  system_role: UserRole;
+  systemRole: UserRole;
   @Column({
     type: 'enum',
     enum: userStatus,
@@ -47,12 +49,14 @@ export class User extends BaseEntity {
   status: userStatus;
   @Column({
     nullable: true,
+    name: 'date_of_birth',
   })
-  date_of_birth: Date;
+  dateOfBirth: Date;
   @Column({
     nullable: true,
+    name: 'last_login_at',
   })
-  last_login_at: Date;
+  lastLoginAt: Date;
   @OneToMany(() => OrganizationMember, (member) => member.user)
   organizationMemberships: OrganizationMember[];
   @OneToMany(() => Notification, (notification) => notification.user)

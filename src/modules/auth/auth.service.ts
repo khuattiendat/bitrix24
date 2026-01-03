@@ -27,7 +27,7 @@ export class AuthService {
     const payload: PayloadToken = {
       sub: user.id,
       email: user.email,
-      system_role: user.system_role,
+      systemRole: user.systemRole,
     };
 
     const accessToken = await this.jwtService.signAsync(payload, {
@@ -45,7 +45,7 @@ export class AuthService {
       refreshToken,
     };
   }
-  private async getProfileinfoUser({
+  public async getProfileinfoUser({
     userId,
     email,
   }: { userId?: number; email?: string } = {}) {
@@ -68,9 +68,9 @@ export class AuthService {
       .select([
         'user.id',
         'user.email',
-        'user.full_name',
-        'user.date_of_birth',
-        'user.system_role',
+        'user.fullName',
+        'user.dateOfBirth',
+        'user.systemRole',
         'user.password',
       ])
 
@@ -137,14 +137,17 @@ export class AuthService {
 
     return validateUserResponse(user);
   }
-  async checkEmailExistInOrganization(
-    email: string,
-    organizationId: number,
-  ): Promise<boolean> {
+  public async checkEmailExistInOrganization({
+    userId,
+    organizationId,
+  }: {
+    userId: number;
+    organizationId: number;
+  }): Promise<boolean> {
     const count = await this.userRepo
       .createQueryBuilder('user')
       .innerJoin('user.organizationMemberships', 'orgMember')
-      .where('user.email = :email', { email })
+      .where('user.id = :userId', { userId })
       .andWhere('orgMember.organization_id = :organizationId', {
         organizationId,
       })
@@ -161,16 +164,6 @@ export class AuthService {
       if (!organization) {
         throw new BadRequestException('Organization not found');
       }
-      // Check email tồn tại trong organization
-      const isEmailExistInOrg = await this.checkEmailExistInOrganization(
-        email,
-        organizationId,
-      );
-      if (isEmailExistInOrg) {
-        throw new BadRequestException(
-          'Email already exists in the organization',
-        );
-      }
 
       // Lấy hoặc tạo user
       let user = await this.userRepo.findOne({ where: { email } });
@@ -181,6 +174,16 @@ export class AuthService {
           full_name: fullName,
           password: hashPassword,
         });
+      }
+      // Check email tồn tại trong organization
+      const isEmailExistInOrg = await this.checkEmailExistInOrganization({
+        userId: user.id,
+        organizationId,
+      });
+      if (isEmailExistInOrg) {
+        throw new BadRequestException(
+          'Email already exists in the organization',
+        );
       }
 
       // Tạo organization member

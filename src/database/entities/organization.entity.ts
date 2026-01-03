@@ -23,8 +23,8 @@ export class Organization extends BaseEntity {
   @Column({ unique: true, nullable: false, length: 255 })
   slug: string;
 
-  @Column({ unique: true, nullable: false, length: 100 })
-  tax_code: string;
+  @Column({ unique: true, nullable: false, length: 100, name: 'tax_code' })
+  taxCode: string;
 
   @Column({
     type: 'enum',
